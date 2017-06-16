@@ -27,6 +27,8 @@ router.post('/', function(req, res, next){
 			res.redirect('/');
 		}
 	)
+	.catch(err => console.log(err))
+	
 });
 
 router.get('/add', function(req, res, next){
