@@ -1,6 +1,10 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
+var models = require('../models');
+var Page = models.Page;
+var User = models.User;
+
 
 router.get('/', function(req, res, next){
 	// retrieve all wiki pages
@@ -9,7 +13,20 @@ router.get('/', function(req, res, next){
 
 router.post('/', function(req, res, next){
 	// submit a new page to the db
-	res.send("Welcome to wikistack - post!");
+	// res.send("Welcome to wikistack - post!");
+	console.log(req.body);
+	var page = Page.build({
+		title : req.body.title,
+		content: req.body.content,
+		// urlTitle: generateUrlTitle(req.body.title),
+		status: req.body.status
+	});
+
+	page.save().then(
+		function(){
+			res.redirect('/');
+		}
+	)
 });
 
 router.get('/add', function(req, res, next){
