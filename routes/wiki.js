@@ -24,6 +24,7 @@ router.post('/', function(req, res, next){
 			status: req.body.status
 		})
 		.then(function(newPage){
+			newPage.setAuthor(user[0])
 			res.redirect(newPage.route);
 		})
 	})
