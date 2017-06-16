@@ -3,15 +3,6 @@ var db = new Sequelize('postgres://localhost/wikistack', {
 	logging: false
 });
 
-
-// function generateUrlTitle(title){
-//     if(title){
-//         return title.replace(/\s+/g, '_').replace(/\W/g, '');
-//     }else{
-//         return Math.random().toString(36).substring(2,7);
-//     }
-// };
-
 const Page = db.define('page', {
     title: {
         type: Sequelize.STRING,
@@ -65,8 +56,10 @@ const User = db.define('user', {
     }
 });
 
+Page.belongsTo(User, { as: 'author' });
+
 module.exports = {
 	db: db,
-  	Page: Page,
-  	User: User
+    Page: Page,
+    User: User
 };
