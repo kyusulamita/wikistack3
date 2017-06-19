@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 // modular routing that uses io inside it
 app.use('/', makesRouter);
 
-models.db.sync({force: true}).then(function(){
+models.db.sync().then(function(){
 	// start the server
 	app.listen(1337, function(){
 	console.log('listening on port 1337');

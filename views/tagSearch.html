@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}  
+  {% if tags %}
+    <h4>Search by tags: </h4>
+    {% for tag in tags %}
+      {{ tag }} 
+    {% endfor %}
+  {% endif %}
+
+  {% if pages %}
+    <h3>Page results: </h3>
+    <ul class="list-unstyled">
+    {% for page in pages %}
+      <li><a href="{{page.route}}">{{page.title}}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
+{% endblock %}

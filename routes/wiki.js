@@ -18,7 +18,8 @@ router.post('/', function(req, res, next){
 		}
 	})
 	.then(function (user){
-		var arrTags = (req.body.tags).split(" ");
+		var arrTags = req.body.tags;
+		arrTags = arrTags.split(" ");
 		return Page.create({
 			title: req.body.title,
 			content: req.body.content,
@@ -39,6 +40,8 @@ router.get('/add', function(req, res, next){
 	res.render('addpage.html');
 });
 
+
+
 router.get('/:urlTitle', function(req, res, next){
 	Page.findOne({
 		where: {
@@ -49,8 +52,7 @@ router.get('/:urlTitle', function(req, res, next){
 		}]
 	})
 	.then(function(foundPage){
-		var strTags = (foundPage.tags).join(", ");
-		res.render('wikipage', {foundPage, strTags})
+		res.render('wikipage', {foundPage})
 	})
 	.catch(err => console.log(err));
 

@@ -4,9 +4,12 @@
   <h3>{{ foundPage.title }}<small> (<a href="PLACEHOLDER_URL_TITLE/similar">Similar</a>)</small></h3>
   <h4>by <a href="/users/{{foundPage.author.id}}">{{ foundPage.author.name }}</a></h4>
   <h5>{{ foundPage.author.email }}</h5>
-  <div>{{ strTags }}</div>
+  <div>{%for tag in foundPage.tags %}
+    <a href="/search?tags={{tag}}">{{ tag }} </a>
+  {% endfor %}
+  </div>
   <hr/>
-  <div>PLACEHOLDER AUTHOR NAME WITH LINK TO AUTHOR PAGE</div>
+  <div><a href="/users/{{foundPage.author.id}}">{{ foundPage.author.name }}</a></div>
   <div class="page-body">{{ foundPage.content }}</div>
   <hr/>
   <a href="PLACEHOLDER_URL_TITLE/edit" class="btn btn-primary">edit this page</a>

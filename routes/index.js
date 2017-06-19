@@ -19,4 +19,12 @@ router.get('/', function(req, res, next){
 
 });
 
+router.get('/search', function(req, res, next){
+	var tags = [];
+	tags = (req.query.tags) ? req.query.tags.split(" ") : tags;
+	Page.findByTag(tags)
+	.then((pages)=>{
+		res.render('tagSearch', { pages: pages, tags: tags});
+	}).catch((err) => console.log(err));
+})
 module.exports = router;

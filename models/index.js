@@ -41,6 +41,17 @@ const Page = db.define('page', {
                 page.urlTitle =  Math.random().toString(36).substring(2, 7);
             }
         }
+    },
+    classMethods: {
+        findByTag: function(tagArray){
+            return Page.findAll({
+                where : {
+                    tags : {
+                        $overlap: tagArray
+                    }
+                }
+            });
+        }
     }
 });
 
