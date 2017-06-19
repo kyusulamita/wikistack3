@@ -7,7 +7,7 @@ var User = models.User;
 
 
 router.get('/', function(req, res, next){
-	res.render('index.html');
+	res.redirect('/');
 });
 
 router.post('/', function(req, res, next){
@@ -57,5 +57,18 @@ router.get('/:urlTitle', function(req, res, next){
 	.catch(err => console.log(err));
 
 })
+
+router.get('/:urlTitle/similar/',function(req, res, next){
+	Page.findOne({
+		where :{
+			urlTitle: req.params.urlTitle
+		}
+	}).then(function(foundPage){
+		return foundPage.findSimilar();
+	}).then(function(similarPages){
+		res.render('index', {allPages: similarPages});
+	})
+})
+
 
 module.exports = router;
