@@ -18,10 +18,12 @@ router.post('/', function(req, res, next){
 		}
 	})
 	.then(function (user){
+		var arrTags = (req.body.tags).split(" ");
 		return Page.create({
 			title: req.body.title,
 			content: req.body.content,
-			status: req.body.status
+			status: req.body.status,
+			tags: arrTags
 		})
 		.then(function(newPage){
 			newPage.setAuthor(user[0])
@@ -41,10 +43,14 @@ router.get('/:urlTitle', function(req, res, next){
 	Page.findOne({
 		where: {
 			urlTitle: req.params.urlTitle
-		}
+		},
+		include: [{
+			model: User, as: "author"
+		}]
 	})
 	.then(function(foundPage){
-		res.render('wikipage', {foundPage})
+		var strTags = (foundPage.tags).join(", ");
+		res.render('wikipage', {foundPage, strTags})
 	})
 	.catch(err => console.log(err));
 
