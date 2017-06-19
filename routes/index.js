@@ -8,7 +8,7 @@ var Page = models.Page;
 var User = models.User;
 
 router.use('/wiki', wiki);
-router.use('/user', user);
+router.use('/users', user);
 
 router.get('/', function(req, res, next){
 	Page.findAll({})

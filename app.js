@@ -29,6 +29,6 @@ app.use('/', makesRouter);
 models.db.sync().then(function(){
 	// start the server
 	app.listen(1337, function(){
-  	console.log('listening on port 1337');
+	console.log('listening on port 1337');
 	})
 }).catch(console.error);
